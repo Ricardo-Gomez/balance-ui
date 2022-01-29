@@ -1,0 +1,6 @@
+{
+  "workbench.editor.autoLockGroups": {
+    "vscode.markdown.preview.editor": true
+  },
+  "workbench.editor.pinnedTabSizing": "compact"
+}
