@@ -1,6 +1,6 @@
 import { ColorModeScript } from "@chakra-ui/react";
 import * as React from "react";
-import ReactDOM from "react-dom";
+import { hydrate, render }  from "react-dom";
 import { api } from "./api";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -9,10 +9,8 @@ import { handleRefreshToken } from "./utils/networkUtils";
 // import { RecoilRoot, useRecoilSnapshot } from "recoil";
 import "./i18n";
 
-handleRefreshToken();
-api.configure(process.env.REACT_APP_API_URL || "");
-
-ReactDOM.render(
+const rootElement = document.getElementById("root");
+const MainApp = () => (
   <React.StrictMode>
     {/* <RecoilRoot> */}
       {/* <React.Suspense fallback='loading'> */}
@@ -20,9 +18,17 @@ ReactDOM.render(
         <App />
       {/* </React.Suspense> */}
     {/* </RecoilRoot> */}
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
+
+handleRefreshToken();
+api.configure(process.env.REACT_APP_API_URL || "");
+
+if (rootElement && rootElement.hasChildNodes()) {
+  hydrate(<MainApp />, rootElement);
+} else {
+  render(<MainApp />, rootElement);
+}
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://cra.link/PWA
