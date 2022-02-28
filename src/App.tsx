@@ -9,7 +9,6 @@ import { Routes } from "./routes";
 import { BrowserRouter } from "react-router-dom";
 import { AppContextProvider } from "./context/AppContext";
 import { RecoilRoot } from "recoil";
-import { Loader } from "./views/Common/Loader";
 
 const theme = extendTheme(BaseTheme, {
   config: {
