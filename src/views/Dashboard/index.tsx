@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <HStack align='start' spacing='15px'>
-      <SimpleGrid columns={2} spacingX='15px' spacingY='20px'>
+      <SimpleGrid columns={[1,2,3]} spacingX='15px' spacingY='20px'>
         <Stat boxShadow='md' bg={bg} rounded='md' p='.5em'>
           <StatLabel>{t("incomes")}</StatLabel>
           <StatNumber>$ {incomesBalance}</StatNumber>
@@ -84,7 +84,7 @@ const Dashboard: React.FC = () => {
           <StatHelpText>{t("budgetAvailable")}</StatHelpText>
         </Stat>
       </SimpleGrid>
-      <SimpleGrid columns={2} spacingX='15px' spacingY='20px'>
+      <SimpleGrid columns={[1, 2, 3]} spacingX='15px' spacingY='20px'>
         <TransactionList
           data={orderedIncomesDesc}
           bg={bg}

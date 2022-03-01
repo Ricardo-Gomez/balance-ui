@@ -17,6 +17,7 @@ import {
   useDisclosure,
   FormControl,
   Skeleton,
+  IconButton,
 } from "@chakra-ui/react";
 import { FiChevronDown } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
@@ -31,6 +32,7 @@ import { isAuth } from "../../recoil/profile";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useAppContext } from "../../context/AppContext";
 import { Loader } from "../Common/Loader";
+import { GiHamburgerMenu } from "react-icons/gi";
 // import { AddIncome } from "../Forms";
 
 type AppContainerProps = {
@@ -98,7 +100,29 @@ export const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
         mt='0.5em'
         height='80px'
       >
+        <Box display={{ sm: "flex", md: "none" }}>
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              aria-label='Options'
+              icon={<GiHamburgerMenu />}
+              variant='outline'
+            />
+            <MenuList>
+              <MenuItem as={LinkRouter} to='/expenses'>
+                {t("settings")}
+              </MenuItem>
+              <MenuItem onClick={() => openModalFor(Screens.Expenses)}>
+                {t("addExpense")}
+              </MenuItem>
+              <MenuItem onClick={() => openModalFor(Screens.Incomes)}>
+                {t("addIncome")}
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
         <HStack
+          display={{ base: "none", lg: "flex" }}
           justifyContent='center'
           flexGrow={1}
           w='960px'
