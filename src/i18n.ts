@@ -55,6 +55,10 @@ i18n
           expenses: "Expenses",
           date: "{{date, DATE_SHORT}}",
           dateMedWeekday: "{{date, DATE_MED_WITH_WEEKDAY}}",
+          latestTransaction: "Latest {{type}}",
+          noTransactions: "{{type}} not found for the curren month",
+          budget: 'Budget',
+          budgetAvailable: 'Budget Available',
         },
       },
       es: {
@@ -79,7 +83,7 @@ i18n
           submitSuccess:
             "{{formType}} agregado correctamente por $ {{amountValue}}.",
           select: "Seleccione",
-          income: "Ganancia",
+          income: "Ingreso",
           expense: "Gasto",
           validation: {
             isRequired: "Este campo es requerido",
@@ -91,6 +95,10 @@ i18n
           expenses: "Gastos",
           date: "{{date, DATE_SHORT}}",
           date_med: "{{date, DATE_MED_WITH_WEEKDAY}}",
+          latestTransaction: "Ultimos {{type}}",
+          noTransactions: "No hay {{type}} en este mes",
+          budget: 'Presupuesto',
+          budgetAvailable: 'Presupuesto Disponible',
         },
       },
     },

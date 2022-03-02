@@ -41,7 +41,7 @@ export const expensesState = atom({
 
 export const currentTransactionIdState = atom({
   key: "currentTransactionIdState",
-  default: null,
+  default: 0,
 });
 
 export const selectedTransactionState = atom({

@@ -8,6 +8,9 @@ import {
   SimpleGrid,
   useColorModeValue,
   HStack,
+  Flex,
+  Grid,
+  GridItem,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -26,11 +29,9 @@ const Dashboard: React.FC = () => {
   const bg = useColorModeValue("gray.100", "whiteAlpha.200");
   const setIncomes = useSetRecoilState(incomesState);
   const setExpenses = useSetRecoilState(expensesState);
-  const {
-    expensesBalance,
-    budgetAvailable,
-    incomesBalance,
-  } = useRecoilValue(transactionsStatsState);
+  const { expensesBalance, budgetAvailable, incomesBalance } = useRecoilValue(
+    transactionsStatsState
+  );
   const { orderedIncomesDesc } = useRecoilValue(incomesOrderByDate);
   const { orderedExpensesDesc } = useRecoilValue(expensesOrderByDate);
   const dates = useRecoilValue(transactionsDateRangeState);
@@ -53,8 +54,12 @@ const Dashboard: React.FC = () => {
   }, [transactions, setExpenses, setIncomes]);
 
   return (
-    <HStack align='start' spacing='15px'>
-      <SimpleGrid columns={[1,2,3]} spacingX='15px' spacingY='20px'>
+    <Grid
+      w={"100%"}
+      templateColumns='repeat(6, 1fr)'
+      gap={2}
+    >
+      <GridItem rowSpan={1} colSpan={2}>
         <Stat boxShadow='md' bg={bg} rounded='md' p='.5em'>
           <StatLabel>{t("incomes")}</StatLabel>
           <StatNumber>$ {incomesBalance}</StatNumber>
@@ -62,43 +67,43 @@ const Dashboard: React.FC = () => {
             {t("date", { date: new Date(dates[0]) })} -{" "}
             {t("date", { date: new Date(dates[1]) })}
           </StatHelpText>
-          <StatHelpText>
-            <StatArrow type='increase' />
-            23%
-          </StatHelpText>
         </Stat>
+      </GridItem>
+      <GridItem rowSpan={1} colSpan={2}>
         <Stat boxShadow='md' bg={bg} rounded='md' p='.5em'>
           <StatLabel>{t("expenses")}</StatLabel>
           <StatNumber>$ {expensesBalance}</StatNumber>
           <StatHelpText>
             {t("date", { date: dates[0] })} -{t("date", { date: dates[1] })}
           </StatHelpText>
-          <StatHelpText>
-            <StatArrow type='decrease' />
-            23%
-          </StatHelpText>
         </Stat>
+      </GridItem>
+      <GridItem rowSpan={1} colSpan={2}>
         <Stat boxShadow='md' bg={bg} rounded='md' p='.5em'>
           <StatLabel>{t("budget")}</StatLabel>
           <StatNumber>$ {budgetAvailable}</StatNumber>
           <StatHelpText>{t("budgetAvailable")}</StatHelpText>
         </Stat>
-      </SimpleGrid>
-      <SimpleGrid columns={[1, 2, 3]} spacingX='15px' spacingY='20px'>
+      </GridItem>
+      <GridItem colSpan={[6,3]} rowSpan={1}>
         <TransactionList
+          w='100%'
           data={orderedIncomesDesc}
           bg={bg}
-          type='Income'
+          type='Incomes'
           limit={10}
         />
+      </GridItem>
+      <GridItem colSpan={[6,3]} rowSpan={1}>
         <TransactionList
+          w='100%'
           data={orderedExpensesDesc}
           bg={bg}
-          type='Expense'
+          type='Expenses'
           limit={10}
         />
-      </SimpleGrid>
-    </HStack>
+      </GridItem>
+    </Grid>
   );
 };
 

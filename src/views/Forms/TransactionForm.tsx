@@ -16,6 +16,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import DatePicker from "react-date-picker";
+import { useTranslation } from "react-i18next";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { queryFrequenciesValue, categories, paymentTypes } from "../../recoil/userData";
 import { expensesState, incomesState } from "../../recoil/transactions";
@@ -46,6 +47,7 @@ export const TransactionForm = ({ formType, t }: TransactionFormProps) => {
     formState: { errors, isSubmitting },
     reset,
   } = useForm();
+  const { i18n } = useTranslation();
   const {frequencies} = useRecoilValue(queryFrequenciesValue);
   const categoriesState = useRecoilValue(categories);
   const paymentTypesState = useRecoilValue(paymentTypes);
@@ -167,6 +169,7 @@ export const TransactionForm = ({ formType, t }: TransactionFormProps) => {
           <FormControl isInvalid={errors.date}>
             <FormLabel htmlFor='date'>{t("date", { ns: "forms" })}</FormLabel>
             <DatePicker
+              locale={i18n.resolvedLanguage}
               onChange={(e: Date) => setDateValue(e)}
               value={dateValue}
             />

@@ -7,13 +7,16 @@ import {
   Tag,
   StackProps,
   Box,
+  IconButton,
 } from "@chakra-ui/react";
 import { BsCreditCard } from "react-icons/bs";
-// import { IoIosCash, IoIosCard, IoMdCard, IoMdCash } from "react-icons/io";
+import {
+  IoIosRemoveCircleOutline,
+} from "react-icons/io";
 import { GiMoneyStack, GiSideswipe } from "react-icons/gi";
-import { TFunction, useTranslation } from "react-i18next";
-import { useRecoilCallback, useRecoilValue } from "recoil";
-import { currentTransactionIdState, transactionInfoQuery, currentTransactionInfoQuery } from "../../recoil/transactions";
+import { useTranslation } from "react-i18next";
+import { useRecoilCallback } from "recoil";
+import { transactionInfoQuery } from "../../recoil/transactions";
 import { Modal } from "../Common/Modal";
 
 type RowData = {
@@ -23,14 +26,14 @@ type RowData = {
   id?: string;
 };
 type TransactionListProps = StackProps & {
-  type: "Expense" | "Income";
+  type: "Expenses" | "Incomes";
   limit: number;
   data: RowData[];
 };
 
 type TransactionRowProps = StackProps &
   RowData & {
-    type: "Expense" | "Income";
+    type: "Expenses" | "Incomes";
   };
 
 export const TransactionList: React.FC<TransactionListProps> = ({
@@ -44,7 +47,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
     if (data.length === 0) {
       return (
         <Text align='center' shadow='md'>
-          {t('noTransactions')}
+          {t("noTransactions", { type: t(type.toLocaleLowerCase()) })}
         </Text>
       );
     }
@@ -62,20 +65,16 @@ export const TransactionList: React.FC<TransactionListProps> = ({
     ));
   };
   return (
-    <Box
-      maxH='300px'
-      overflowY='scroll'
-      shadow={data.length === 0 ? "md" : "none"}
-    >
+    <Box maxH='300px' shadow={data.length === 0 ? "md" : "none"}>
       <Stack direction='column' align='stretch' spacing='1px' rounded='md'>
         <Text
           textAlign='center'
           p='2'
-          fontSize='sm'
+          fontSize='md'
           fontWeight='medium'
           bg={props.bg}
         >
-          {t('latestTransaction', {type: type})}
+          {t("latestTransaction", { type: t(type.toLocaleLowerCase()) })}
         </Text>
         {renderList()}
       </Stack>
@@ -92,29 +91,25 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   ...props
 }) => {
   const { t } = useTranslation("dashboard");
-  // const currentTrans = useRecoilValue(currentTransactionInfoQuery)
-  // const changeTransaction = useRecoilCallback(({ snapshot, set }) => transId => {
-  //   snapshot.getLoadable(transactionInfoQuery(transId));
-  //   set(currentTransactionIdState, transId);
-  //   console.log(currentTrans)
-  // });
+  // const changeTransaction = useRecoilCallback(
+  //   ({ snapshot }) =>
+  //     async (transId) => {
+  //       const tq = await snapshot.getPromise(transactionInfoQuery(transId));
+  //       console.log("tq", tq);
+  //     }
+  // );
+
   return (
-    <Stack
-      direction='row'
-      align='center'
-      p='1'
-      rounded='base'
-      {...props}
-      cursor='pointer'
-      // onClick={() => changeTransaction(id)}
-    >
-      {source.paymentType.toLocaleLowerCase() === "card" ? (
-        <Icon boxSize='2em' color='teal' as={BsCreditCard} />
-      ) : source.paymentType.toLocaleLowerCase() === "cash" ? (
-        <Icon boxSize='2em' color='teal' as={GiMoneyStack} />
-      ) : (
-        <Icon boxSize='2em' color='teal' as={GiSideswipe} />
-      )}
+    <Stack direction='row' align='center' p='1' rounded='base' {...props}>
+      <Flex alignSelf='center'>
+        {source.paymentType.toLocaleLowerCase() === "card" ? (
+          <Icon boxSize='2em' color='teal' as={BsCreditCard} />
+        ) : source.paymentType.toLocaleLowerCase() === "cash" ? (
+          <Icon boxSize='2em' color='teal' as={GiMoneyStack} />
+        ) : (
+          <Icon boxSize='2em' color='teal' as={GiSideswipe} />
+        )}
+      </Flex>
       <Stack direction='column' align='center' flexGrow={1}>
         <Text fontSize='small' fontWeight='semibold' maxW='100px' isTruncated>
           {source.name}
@@ -126,12 +121,18 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
       <Flex>
         <Tag
           justifySelf='end'
-          colorScheme={type === "Income" ? "green" : "red"}
+          colorScheme={type === "Incomes" ? "green" : "red"}
           size='sm'
         >
           ${amount.toFixed(2)}
         </Tag>
       </Flex>
+      <IconButton
+        variant='ghost'
+        colorScheme='red'
+        aria-label='Delete'
+        icon={<IoIosRemoveCircleOutline fontSize={"2em"} />}
+      />
     </Stack>
   );
 };
