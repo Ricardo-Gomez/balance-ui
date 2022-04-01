@@ -183,10 +183,10 @@ export const AppContainerWithLoader: React.FC = () => {
   const auth = useRecoilValue(isAuth);
   return auth ? (
     <AppContainer>
-      <SimpleGrid columns={[1, 2, 4]} spacingX='15px' spacingY='20px'>
-        {[1, 2, 3, 4].map((i) => (
+      <SimpleGrid columns={[1, 2, 3]} spacingX='10px' spacingY='10px'>
+        {[1, 2, 3].map((i) => (
           <Skeleton key={i} isLoaded={false}>
-            <Box minW='205px' minH='350px'></Box>
+            <Box minW='325px' minH='200px'></Box>
           </Skeleton>
         ))}
       </SimpleGrid>

@@ -65,9 +65,7 @@ export const App = () => (
     <AppContextProvider>
       <BrowserRouter>
         <RecoilRoot>
-          {/* <React.Suspense fallback={<Loader fullwidth />}> */}
             <Routes />
-          {/* </React.Suspense> */}
         </RecoilRoot>
       </BrowserRouter>
     </AppContextProvider>

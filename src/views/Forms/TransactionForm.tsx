@@ -46,7 +46,14 @@ export const TransactionForm = ({ formType, t }: TransactionFormProps) => {
     unregister,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm();
+  } = useForm({defaultValues:{
+    date: new Date(),
+    amount: '0',
+    frequency: '',
+    category: '',
+    source: '',
+    details: ''
+  }});
   const { i18n } = useTranslation();
   const {frequencies} = useRecoilValue(queryFrequenciesValue);
   const categoriesState = useRecoilValue(categories);
@@ -105,7 +112,10 @@ export const TransactionForm = ({ formType, t }: TransactionFormProps) => {
         isClosable: true,
       });
     }
-    reset(values);
+    reset();
+    setAmountValue('0');
+    setDateValue(new Date());
+    setIsRecurrentChecked(false)
   };
 
   return (

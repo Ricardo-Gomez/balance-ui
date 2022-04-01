@@ -10,9 +10,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { BsCreditCard } from "react-icons/bs";
-import {
-  IoIosRemoveCircleOutline,
-} from "react-icons/io";
+import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { GiMoneyStack, GiSideswipe } from "react-icons/gi";
 import { useTranslation } from "react-i18next";
 import { useRecoilCallback } from "recoil";
@@ -29,17 +27,20 @@ type TransactionListProps = StackProps & {
   type: "Expenses" | "Incomes";
   limit: number;
   data: RowData[];
+  handleDelete: Function;
 };
 
 type TransactionRowProps = StackProps &
   RowData & {
     type: "Expenses" | "Incomes";
+    handleDelete: Function;
   };
 
 export const TransactionList: React.FC<TransactionListProps> = ({
   type,
   limit,
   data,
+  handleDelete,
   ...props
 }) => {
   const { t } = useTranslation("dashboard");
@@ -54,6 +55,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({
 
     return data.map((t) => (
       <TransactionRow
+        handleDelete={handleDelete}
         key={t.id}
         id={t.id}
         type={type}
@@ -128,6 +130,9 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
         </Tag>
       </Flex>
       <IconButton
+        onClick={async () => {
+          await props.handleDelete(id, type);
+        }}
         variant='ghost'
         colorScheme='red'
         aria-label='Delete'

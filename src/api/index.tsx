@@ -83,6 +83,9 @@ export const api = {
       expenses: transactionsPromise[1],
     };
   },
+  deleteTransaction: async (id: string) => {
+    return axios.delete(`${BASE_TRANSACTION_URL}/${id}`).then((response) => response.data);
+  },
   post: async (url: string, body: Record<string, any>) => {
     return axios.post(url, body).then((response) => response.data);
     //   .catch((error) => {
