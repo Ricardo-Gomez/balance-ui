@@ -104,9 +104,9 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
   return (
     <Stack direction='row' align='center' p='1' rounded='base' {...props}>
       <Flex alignSelf='center'>
-        {source.paymentType.toLocaleLowerCase() === "card" ? (
+        {source?.paymentType.toLocaleLowerCase() === "card" ? (
           <Icon boxSize='2em' color='teal' as={BsCreditCard} />
-        ) : source.paymentType.toLocaleLowerCase() === "cash" ? (
+        ) : source?.paymentType.toLocaleLowerCase() === "cash" ? (
           <Icon boxSize='2em' color='teal' as={GiMoneyStack} />
         ) : (
           <Icon boxSize='2em' color='teal' as={GiSideswipe} />
@@ -114,7 +114,7 @@ const TransactionRow: React.FC<TransactionRowProps> = ({
       </Flex>
       <Stack direction='column' align='center' flexGrow={1}>
         <Text fontSize='small' fontWeight='semibold' maxW='100px' isTruncated>
-          {source.name}
+          {source?.name ?? t('other')}
         </Text>
         <Text fontSize='x-small' fontWeight='semibold' color='gray'>
           {t("dateMedWeekday", { date: new Date(date) })}

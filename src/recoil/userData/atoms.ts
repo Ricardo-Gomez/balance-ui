@@ -7,7 +7,7 @@ let defaultFrequencies = [];
 if (null !== frequenciesJson) {
   defaultFrequencies = JSON.parse(frequenciesJson);
 }
-export const categories = atom({
+export const categories = atom<Record<string, any>[]>({
   key: "categoryState",
   default: [],
 });

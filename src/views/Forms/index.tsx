@@ -1,7 +1,7 @@
 import { TransactionForm } from "./TransactionForm";
-import { AddIncome } from "./AddIncome";
+import { AddPaymentSource } from "./AddPaymentSource";
 
 export {
-  TransactionForm as AddExpense,
-  AddIncome,
+  TransactionForm,
+  AddPaymentSource,
 };

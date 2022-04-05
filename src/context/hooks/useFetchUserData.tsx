@@ -13,7 +13,6 @@ export function useFetchUserData() {
       try {
         const categories = await api.getCategories();
         const paymentTypes = await api.getPaymentTypes();
-        console.log(paymentTypes)
         setUserCategoriess(categories);
         setUserPaymentTypes(paymentTypes);
 

@@ -6,10 +6,11 @@ import {
   FormControl,
   Input,
   Button,
-  VStack,
-  StackDivider,
+  HStack,
+  Flex,
 } from "@chakra-ui/react";
-// import { useDataManager } from "../../context/hooks/useFetchUserData";
+import { useSetRecoilState } from "recoil";
+import { paymentTypes } from "../../recoil/userData";
 import { InputSelect } from "../Common/InputSelect";
 import { api } from "../../api";
 
@@ -17,27 +18,28 @@ type FormValues = {
   paymentType: string;
   name: string;
 };
-export const AddIncome = ({ t }) => {
+export const AddPaymentSource = ({ t }) => {
+  const setpaymentTypes = useSetRecoilState(paymentTypes);
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
     reset,
   } = useForm();
-  //   const { addCategory, addPaymentType } = useDataManager();
   async function onSubmit(values: FormValues) {
     console.log(values);
 
-    const a = await api.addPaymentType({
+    const paymentType = await api.addPaymentType({
       name: values.name,
       paymentType: values.paymentType,
     });
-    console.log(a);
+    console.log(paymentType);
+    setpaymentTypes((paymentTypes) => [...paymentTypes, paymentType]);
     reset();
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <VStack spacing='4' divider={<StackDivider borderColor='gray.200' />}>
+      <HStack spacing='4'>
         <FormControl isInvalid={errors.paymentType}>
           <InputSelect
             register={register}
@@ -47,8 +49,8 @@ export const AddIncome = ({ t }) => {
             placeHolder={t("select", { ns: "forms" })}
             isRequired
             selectOptions={[
-              { id: "2", name: "Card" },
-              { id: "3", name: "Other" },
+              { id: "Card", name: "Card" },
+              { id: "Other", name: "Other" },
             ]}
           />
           <FormErrorMessage>
@@ -56,7 +58,7 @@ export const AddIncome = ({ t }) => {
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={errors.name}>
-          <FormLabel htmlFor='name'>Category Name</FormLabel>
+          <FormLabel htmlFor='name'>{t("name")}</FormLabel>
           <Input
             id='name'
             placeholder='name'
@@ -69,16 +71,18 @@ export const AddIncome = ({ t }) => {
             {errors.name && errors.name.message}
           </FormErrorMessage>
         </FormControl>
+      </HStack>
+      <Flex justifyContent='center'>
         <Button
-          alignSelf='center'
+          display='flex'
           mt={4}
           colorScheme='teal'
           isLoading={isSubmitting}
           type='submit'
         >
-          Add
+          {t("add", { ns: "appContainer" })}
         </Button>
-      </VStack>
+      </Flex>
     </form>
   );
 };

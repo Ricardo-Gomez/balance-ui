@@ -26,14 +26,12 @@ import { ColorModeSwitcher } from "../Common/ColorModeSwitcher";
 import { LangSwitcher } from "../Common/LangSwitcher";
 import { Modal } from "../Common/Modal";
 import { useFetchUserData } from "../../context/hooks/useFetchUserData";
-import { TransactionForm } from "../Forms/TransactionForm";
 import { transactionsDateRangeState } from "../../recoil/transactions";
 import { isAuth } from "../../recoil/profile";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { useAppContext } from "../../context/AppContext";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { Loader } from "../Common/Loader";
 import { GiHamburgerMenu } from "react-icons/gi";
-// import { AddIncome } from "../Forms";
+import { TransactionForm } from "../Forms";
 
 type AppContainerProps = {
   children: React.ReactNode;
@@ -109,7 +107,10 @@ export const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
               variant='outline'
             />
             <MenuList>
-              <MenuItem as={LinkRouter} to='/expenses'>
+              <MenuItem as={LinkRouter} to='/dashboard'>
+                {t("dashboard")}
+              </MenuItem>
+              <MenuItem as={LinkRouter} to='/settings'>
                 {t("settings")}
               </MenuItem>
               <MenuItem onClick={() => openModalFor(Screens.Expenses)}>
@@ -131,12 +132,15 @@ export const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
             <StackDivider alignSelf='center' h='20px' borderColor='gray.200' />
           }
         >
+          <Button as={LinkRouter} to='/dashboard'>
+            {t("Dashboard")}
+          </Button>
           <Menu>
             <MenuButton as={Button} rightIcon={<FiChevronDown />}>
               {t("profile")}
             </MenuButton>
             <MenuList>
-              <MenuItem as={LinkRouter} to='/expenses'>
+              <MenuItem as={LinkRouter} to='/settings'>
                 {t("settings")}
               </MenuItem>
             </MenuList>

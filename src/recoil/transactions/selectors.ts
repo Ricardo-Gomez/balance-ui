@@ -114,6 +114,7 @@ export const transactionsStatsState = selector({
       .reduce((t, c) => t + c.amount, 0)
       .toFixed(2);
 
+    const generalBalance = Number(incomesBalance) - Number(expensesBalance);
     const budgetAvailable = budget - parseFloat(expensesBalance);
     const budgetSpent = budget - parseFloat(expensesBalance);
 
@@ -128,6 +129,7 @@ export const transactionsStatsState = selector({
     });
 
     return {
+      generalBalance,
       incomesBalance,
       expensesBalance,
       budgetAvailable,

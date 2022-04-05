@@ -86,6 +86,12 @@ export const api = {
   deleteTransaction: async (id: string) => {
     return axios.delete(`${BASE_TRANSACTION_URL}/${id}`).then((response) => response.data);
   },
+  deleteCategory: async (id: string) => {
+    return await axios.delete(`${BASE_USERS_URL}/categories/${id}`).then((response) => response.data);
+  },
+  deletePaymentType: async (id: string) => {
+    return await axios.delete(`${BASE_USERS_URL}/sources/${id}`).then((response) => response.data);
+  },
   post: async (url: string, body: Record<string, any>) => {
     return axios.post(url, body).then((response) => response.data);
     //   .catch((error) => {

@@ -6,6 +6,7 @@ import { AppContainerWithLoader } from "../views/AppContainer/AppContainer";
 const Login = React.lazy(() => import("../views/Auth/Login"));
 const Home = React.lazy(() => import("./Home"));
 const Dashboard = React.lazy(() => import("../views/Dashboard"));
+const Settings = React.lazy(() => import("../views/Settings"));
 
 export const Routes = () => (
   <Switch>
@@ -13,6 +14,7 @@ export const Routes = () => (
       <Route key='login' path='/login' exact component={Login} />
       <Route key='home' path='/' exact component={Home} />
       <PrivateRoute path='/dashboard' exact component={Dashboard} />
+      <PrivateRoute path='/settings' exact component={Settings} />
     </React.Suspense>
   </Switch>
 );

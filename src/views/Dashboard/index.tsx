@@ -31,7 +31,7 @@ const Dashboard: React.FC = () => {
   const bg = useColorModeValue("gray.100", "whiteAlpha.200");
   const [incomes, setIncomes] = useRecoilState(incomesState);
   const [expenses,setExpenses] = useRecoilState(expensesState);
-  const { expensesBalance, budgetAvailable, incomesBalance } = useRecoilValue(
+  const { expensesBalance, budgetAvailable, incomesBalance, generalBalance } = useRecoilValue(
     transactionsStatsState
   );
   const { orderedIncomesDesc } = useRecoilValue(incomesOrderByDate);
@@ -94,11 +94,18 @@ const Dashboard: React.FC = () => {
       </GridItem>
       <GridItem rowSpan={1} colSpan={2}>
         <Stat boxShadow='md' bg={bg} rounded='md' p='.5em'>
+          <StatLabel>{t("Balance")}</StatLabel>
+          <StatNumber color={generalBalance > 0 ? 'green.200' : 'red.200'}>$ {generalBalance}</StatNumber>
+          <StatHelpText>{t("totalBalance")}</StatHelpText>
+        </Stat>
+      </GridItem>
+      {/* <GridItem rowSpan={1} colSpan={2}>
+        <Stat boxShadow='md' bg={bg} rounded='md' p='.5em'>
           <StatLabel>{t("budget")}</StatLabel>
           <StatNumber>$ {budgetAvailable}</StatNumber>
           <StatHelpText>{t("budgetAvailable")}</StatHelpText>
         </Stat>
-      </GridItem>
+      </GridItem> */}
       <GridItem colSpan={[6, 3]} rowSpan={1}>
         <TransactionList
           handleDelete={handleDeleteTransaction}

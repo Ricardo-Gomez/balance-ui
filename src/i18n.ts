@@ -31,8 +31,11 @@ i18n
           close: "Close",
         },
         forms: {
+          name: 'Name',
           category: "Category",
+          categories: "Categories",
           paymentType: "Payment Type",
+          paymentMethods: "Payment Methods",
           amount: "Amount",
           date: "Date",
           isRecurrent: "Is Recurrent",
@@ -51,6 +54,8 @@ i18n
           },
         },
         dashboard: {
+          totalBalance: 'Month Balance',
+          other: 'Other',
           incomes: "Incomes",
           expenses: "Expenses",
           date: "{{date, DATE_SHORT}}",
@@ -71,8 +76,11 @@ i18n
           close: "Cerrar",
         },
         forms: {
+          name: 'Nombre',
           category: "Categoria",
+          categories: "Categorias",
           paymentType: "Tipo de pago",
+          paymentMethods: "Metodos de pago",
           amount: "Cantidad",
           date: "Fecha",
           isRecurrent: "Es Recurrente",
@@ -91,6 +99,8 @@ i18n
           },
         },
         dashboard: {
+          totalBalance: 'Balance del Mes',
+          other: 'Otros',
           incomes: "Ingresos",
           expenses: "Gastos",
           date: "{{date, DATE_SHORT}}",

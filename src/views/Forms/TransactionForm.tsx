@@ -25,15 +25,6 @@ import { api } from "../../api";
 import { ExpenseType } from "../../types/transaction";
 
 type FormValues = ExpenseType;
-// {
-//   category: string;
-//   source: string;
-//   amount: string;
-//   date: Date;
-//   isRecurrent: boolean;
-//   frequencyId?: string;
-//   details?: string;
-// };
 type TransactionFormProps = {
   formType: "Expense" | "Income";
   t: Function;
