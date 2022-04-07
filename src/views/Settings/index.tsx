@@ -1,6 +1,5 @@
 import {
   Flex,
-  HStack,
   Icon,
   Tag,
   TagCloseButton,
@@ -9,7 +8,6 @@ import {
   Text,
   CloseButton,
   Heading,
-  StackDivider,
   Box,
 } from "@chakra-ui/react";
 import React from "react";
@@ -42,19 +40,13 @@ const Settings: React.FC = () => {
   };
   const { t } = useTranslation(["forms", "appContainer"]);
   return (
-    <>
-    
-    <HStack
-      spacing={5}
-      align='stretch'
-      divider={<StackDivider borderColor='gray.200' />}
-    >
+    <Flex flexWrap='wrap'>
       <Flex
         p={5}
         shadow='md'
         borderWidth='1px'
         flexDir='column'
-        width='50%'
+        flex='50%'
         maxH='500px'
       >
         <Heading size='lg' textAlign='center'>
@@ -99,7 +91,7 @@ const Settings: React.FC = () => {
         shadow='md'
         borderWidth='1px'
         flexDir='column'
-        width='50%'
+        flex='50%'
         maxH='500px'
         overflow='auto'
       >
@@ -116,8 +108,7 @@ const Settings: React.FC = () => {
           ))}
         </Box>
       </Flex>
-    </HStack>
-    </>
+    </Flex>
   );
 };
 
